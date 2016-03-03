@@ -1,0 +1,5 @@
+/Users/timdonlan/Projects/ItemGen/ItemGen/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/timdonlan/Projects/ItemGen/ItemGen/bin/Debug/ItemGen.exe.mdb
+/Users/timdonlan/Projects/ItemGen/ItemGen/bin/Debug/ItemGen.exe
+/Users/timdonlan/Projects/ItemGen/ItemGen/obj/x86/Debug/ItemGen.exe
+/Users/timdonlan/Projects/ItemGen/ItemGen/obj/x86/Debug/ItemGen.exe.mdb
