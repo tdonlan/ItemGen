@@ -18,8 +18,6 @@ namespace ItemGen
 
 		public Random r = new Random ();
 
-
-
 		public Item(string prefix, string baseName, string suffix, QualityType qualityType, ItemType itemType)
 		{
 			this.prefix = prefix;

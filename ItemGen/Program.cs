@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ItemGen
 {
@@ -6,6 +7,9 @@ namespace ItemGen
 	{
 		public static void Main (string[] args)
 		{
+			bool fileMode = true;
+			string fileName = "output.txt";
+
 			NameLibrary lib = new NameLibrary ();
 			while (true) {
 				Console.WriteLine ("\n(m) melee, (r) ranged, (t) thrown, (h) head, (c) chest, (l) legs, (g) gloves, (b) boots, (i) misc\n");
@@ -13,11 +17,28 @@ namespace ItemGen
 				ConsoleKeyInfo c = Console.ReadKey ();
 				Console.WriteLine ("\n\n");
 
-				Console.Write (ItemFactory.getItemForType (lib, getItemType(c.KeyChar)));
+				Item i = ItemFactory.getItemForType (lib, getItemType (c.KeyChar));
+				Console.Write (i);
+				if (fileMode) {
+					saveItem (fileName, i);
+				}
+				
 			}
 		}
 
-		public static ItemType getItemType(char c){
+		private static void saveItem(string filename, Item i)
+		{
+			using (StreamWriter sw = File.AppendText(filename)) 
+			{
+				sw.WriteLine("\n");
+				sw.WriteLine(i.ToString());
+
+			}
+		}
+
+
+
+		private static ItemType getItemType(char c){
 			Random r = new Random();
 			int v = r.Next (3);
 			switch(c)
