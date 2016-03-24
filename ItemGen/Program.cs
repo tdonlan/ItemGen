@@ -9,22 +9,35 @@ namespace ItemGen
 		{
 			bool fileMode = true;
 			string fileName = "output.txt";
+			char lastChar = 'm';
 
 			NameLibrary lib = new NameLibrary ();
 			while (true) {
-				Console.WriteLine ("\n(m) melee, (r) ranged, (t) thrown, (h) head, (c) chest, (l) legs, (g) gloves, (b) boots, (i) misc\n");
 
-				ConsoleKeyInfo c = Console.ReadKey ();
+				Item i = null;
+
+				Console.WriteLine ("\n(m) melee, (r) ranged, (t) thrown, (h) head, (c) chest, (l) legs, (g) gloves, (b) boots, (i) misc, (1-n) level\n");
+
+				char c = Console.ReadKey ().KeyChar;
+				if (Char.IsNumber (c)) {
+					i = ItemFactory.getItemForTypeAndLevel (lib, getItemType (lastChar), Int32.Parse (c.ToString()));
+				} else {
+					lastChar = c;
+					i = ItemFactory.getItemForType (lib, getItemType (lastChar));
+
+				}
+
 				Console.WriteLine ("\n\n");
-
-				Item i = ItemFactory.getItemForType (lib, getItemType (c.KeyChar));
 				Console.Write (i);
+
 				if (fileMode) {
 					saveItem (fileName, i);
 				}
 				
 			}
 		}
+
+
 
 		private static void saveItem(string filename, Item i)
 		{

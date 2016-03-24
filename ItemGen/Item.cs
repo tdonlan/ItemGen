@@ -18,6 +18,19 @@ namespace ItemGen
 
 		public Random r = new Random ();
 
+		public Item (string prefix, string baseName, string suffix, QualityType qualityType, ItemType itemType, int level)
+		{
+			this.prefix = prefix;
+			this.baseName = baseName;
+			this.suffix = suffix;
+			this.qualityType = qualityType;
+			this.itemType = itemType;
+
+			this.level = level;
+
+			init ();
+		}
+
 		public Item(string prefix, string baseName, string suffix, QualityType qualityType, ItemType itemType)
 		{
 			this.prefix = prefix;
@@ -28,12 +41,18 @@ namespace ItemGen
 		
 			this.level = r.Next(10)+1;
 
+			init ();
+		}
+
+		private void init()
+		{
 			this.statPoints = StatCalculator.getStatBase(this.level,this.itemType);
 			this.statPoints = this.statPoints + (int)Math.Round(this.statPoints * StatCalculator.getQualityMultiplier(qualityType));
 			this.statPoints = StatCalculator.statWiggle (this.statPoints, r);
 
 			string suffixStr = suffix != string.Empty ? "of " + suffix : "";
 			this.name = string.Format ("{0} {1} {2}", prefix, baseName, suffixStr);
+
 		}
 
 		public override string ToString ()
@@ -93,6 +112,11 @@ namespace ItemGen
 		public static Item getItemForType(NameLibrary lib, ItemType type)
 		{
 			return new Item(lib.getPrefix(),lib.getBaseNameForItemType(type),lib.getSuffix(),lib.getQuality(),type);
+		}
+
+		public static Item getItemForTypeAndLevel(NameLibrary lib, ItemType type, int level)
+		{
+			return new Item(lib.getPrefix(),lib.getBaseNameForItemType(type),lib.getSuffix(),lib.getQuality(),type, level);
 		}
 			
 	}
