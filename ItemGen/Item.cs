@@ -16,6 +16,8 @@ namespace ItemGen
 
 		public int statPoints;
 
+		public Random r = new Random ();
+
 
 
 		public Item(string prefix, string baseName, string suffix, QualityType qualityType, ItemType itemType)
@@ -25,8 +27,7 @@ namespace ItemGen
 			this.suffix = suffix;
 			this.qualityType = qualityType;
 			this.itemType = itemType;
-
-			Random r = new Random();
+		
 			this.level = r.Next(10)+1;
 
 			this.statPoints = StatCalculator.getStatBase(this.level,this.itemType);
@@ -57,6 +58,7 @@ namespace ItemGen
 
 		}
 
+
 		private string printItem()
 		{
 			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nAC: {4}", name,level.ToString(), qualityType.ToString(), itemType.ToString(), statPoints.ToString());
@@ -65,13 +67,19 @@ namespace ItemGen
 
 		private string printWeapon()
 		{
-			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nDmg: {4}", name,level.ToString(), qualityType.ToString(), itemType.ToString(), statPoints.ToString());
+			string dmgRange = StatCalculator.getWeaponDmgRange (statPoints, itemType);
+			int AP = StatCalculator.getAP (itemType, qualityType, r);
+			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nDmg: {4} AP: {5}\n", name,level.ToString(), qualityType.ToString(), itemType.ToString(), dmgRange, AP.ToString());
 			return retval;	
 		}
 
 		private string printRanged()
 		{
-			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nDmg: {4}", name,level.ToString(), qualityType.ToString(), itemType.ToString(), statPoints.ToString());
+			string dmgRange = StatCalculator.getWeaponDmgRange (statPoints, itemType);
+			int AP = StatCalculator.getAP (itemType, qualityType, r);
+			int range = StatCalculator.getRange (itemType, qualityType, r);
+			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nDmg: {4} AP: {5} Rng: {6}\n", name,level.ToString(), qualityType.ToString(), 
+				itemType.ToString(), dmgRange, AP.ToString(), range.ToString());
 			return retval;	
 		}
 	}

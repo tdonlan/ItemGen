@@ -78,6 +78,145 @@ namespace ItemGen
 			return (int)Math.Round (stat * range);
 		}
 
+		public static string getWeaponDmgRange(int dmg, ItemType type)
+		{
+			float rangeVal;
+			switch(type)
+			{
+			case  ItemType.FastMelee:
+			case ItemType.FastRanged:
+			case ItemType.FastThrown:
+				rangeVal = .1f;
+				break;
+			case ItemType.MedMelee:
+			case ItemType.MedRanged:
+			case ItemType.MedThrown:
+				rangeVal = .2f;
+				break;
+			case ItemType.SlowMelee:
+			case ItemType.SlowRanged:
+			case ItemType.SlowThrown:
+				rangeVal = .3f;
+				break;
+			default:
+				rangeVal = .1f;
+				break;
+				
+				
+			}
+
+			int low = dmg - (int)Math.Round (dmg * rangeVal);
+			int high = dmg + (int)Math.Round (dmg * rangeVal);
+
+
+			return string.Format ("{0}-{1}", low, high);
+		}
+
+		public static int getAP(ItemType type, QualityType quality, Random r)
+		{
+
+			int ap;
+			switch (type) {
+			case  ItemType.FastMelee:
+			case ItemType.FastRanged:
+			case ItemType.FastThrown:
+				ap = r.Next(1,4);
+				break;
+			case ItemType.MedMelee:
+			case ItemType.MedRanged:
+			case ItemType.MedThrown:
+				ap = r.Next(4,7);
+				break;
+			case ItemType.SlowMelee:
+			case ItemType.SlowRanged:
+			case ItemType.SlowThrown:
+				ap = r.Next(7,10);
+				break;
+			default:
+				ap = 5;
+				break;
+
+
+			}
+
+			switch (quality) {
+			case QualityType.Poor:
+				ap = iClamp (ap + 1, 1, 10);
+				break;
+
+			case QualityType.Epic:
+				ap = iClamp (ap - 1, 1, 10);
+				break;
+			case QualityType.Legendary:
+				ap = iClamp (ap - 2, 1, 10);
+				break;
+				default:
+					break;
+				
+
+			}
+
+			return ap;
+		}
+
+		private static int iClamp(int val, int min, int max)
+		{
+			if (val < min) {val = min;
+			}
+				
+			if (val > max) {val = max;
+			}
+			return val;
+		}
+
+		public static int getRange(ItemType type, QualityType quality, Random r)
+		{
+
+			int range;
+			switch (type) {
+
+			case ItemType.FastRanged:
+			case ItemType.FastThrown:
+				range = r.Next(5,10);
+				break;
+
+			case ItemType.MedRanged:
+			case ItemType.MedThrown:
+				range = r.Next(7,15);
+				break;
+
+			case ItemType.SlowRanged:
+			case ItemType.SlowThrown:
+				range = r.Next(10,20);
+				break;
+			default:
+				range = 10;
+				break;
+
+			}
+
+			switch (quality) {
+			case QualityType.Poor:
+				range = iClamp (range - r.Next(10), 5, 50);
+				break;
+
+			case QualityType.Fine:
+				range = iClamp (range + r.Next(5), 5, 50);
+				break;
+			case QualityType.Epic:
+				range = iClamp (range + r.Next(5,10), 5, 50);
+				break;
+			case QualityType.Legendary:
+				range = iClamp (range + r.Next(10,20), 5, 50);
+				break;
+			default:
+				break;
+			}
+
+			return range;
+
+		}
+
 
 
 	}

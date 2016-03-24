@@ -18,14 +18,40 @@ namespace ItemGen
 		}
 
 		public static ItemType getItemType(char c){
+			Random r = new Random();
+			int v = r.Next (3);
 			switch(c)
 			{
 			case 'm':
-				return ItemType.FastMelee;
+				if (v == 0) {
+					return ItemType.FastMelee;
+				}
+				else if (v == 1) {
+					return ItemType.MedMelee;
+				}
+				else {
+					return ItemType.SlowMelee;
+				}
 			case 'r':
-				return ItemType.FastRanged;
+				if (v == 0) {
+					return ItemType.FastRanged;
+				}
+				else if (v == 1) {
+					return ItemType.MedRanged;
+				}
+				else {
+					return ItemType.SlowRanged;
+				}
 			case 't':
-				return ItemType.FastThrown;
+				if (v == 0) {
+					return ItemType.FastThrown;
+				}
+				else if (v == 1) {
+					return ItemType.MedThrown;
+				}
+				else {
+					return ItemType.SlowThrown;
+				}
 			case 'h':
 				return ItemType.Head;
 			case 'c':
