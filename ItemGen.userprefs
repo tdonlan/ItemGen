@@ -1,1 +1,15 @@
-﻿<Properties StartupItem="ItemGen/ItemGen.csproj" />
+﻿<Properties StartupItem="ItemGen/ItemGen.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ItemGen/NameLibrary.cs">
+    <Files>
+      <File FileName="ItemGen/Program.cs" Line="13" Column="24" />
+      <File FileName="ItemGen/Item.cs" Line="21" Column="35" />
+      <File FileName="ItemGen/Enums.cs" Line="22" Column="10" />
+      <File FileName="ItemGen/NameLibrary.cs" Line="146" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

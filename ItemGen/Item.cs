@@ -2,6 +2,7 @@
 
 namespace ItemGen
 {
+
 	public class Item
 	{
 		public string name;
@@ -13,6 +14,10 @@ namespace ItemGen
 		public ItemType itemType;
 		public int level;
 
+		public int statPoints;
+
+
+
 		public Item(string prefix, string baseName, string suffix, QualityType qualityType, ItemType itemType)
 		{
 			this.prefix = prefix;
@@ -21,14 +26,53 @@ namespace ItemGen
 			this.qualityType = qualityType;
 			this.itemType = itemType;
 
+			Random r = new Random();
+			this.level = r.Next(10)+1;
+
+			this.statPoints = StatCalculator.getStatBase(this.level,this.itemType);
+			this.statPoints = this.statPoints + (int)Math.Round(this.statPoints * StatCalculator.getQualityMultiplier(qualityType));
+			this.statPoints = StatCalculator.statWiggle (this.statPoints, r);
+
 			string suffixStr = suffix != string.Empty ? "of " + suffix : "";
 			this.name = string.Format ("{0} {1} {2}", prefix, baseName, suffixStr);
 		}
 
 		public override string ToString ()
 		{
-			string retval = string.Format ("{0}\n{1}\n{2}", name, qualityType.ToString(), itemType.ToString());
-			return retval;
+			switch (itemType) {
+				case ItemType.FastMelee:
+				case ItemType.MedMelee:
+				case ItemType.SlowMelee:
+					return printWeapon ();
+				case ItemType.FastRanged:
+				case ItemType.FastThrown:
+				case ItemType.MedRanged:
+				case ItemType.MedThrown:
+				case ItemType.SlowRanged:
+				case ItemType.SlowThrown:
+					return printRanged ();
+				default:
+					return printItem ();
+			}
+
+		}
+
+		private string printItem()
+		{
+			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nAC: {4}", name,level.ToString(), qualityType.ToString(), itemType.ToString(), statPoints.ToString());
+			return retval;	
+		}
+
+		private string printWeapon()
+		{
+			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nDmg: {4}", name,level.ToString(), qualityType.ToString(), itemType.ToString(), statPoints.ToString());
+			return retval;	
+		}
+
+		private string printRanged()
+		{
+			string retval = string.Format ("{0}\nLvl: {1} - {2}\n{3}\nDmg: {4}", name,level.ToString(), qualityType.ToString(), itemType.ToString(), statPoints.ToString());
+			return retval;	
 		}
 	}
 

@@ -15,6 +15,7 @@ namespace ItemGen
 		{
 			r = new Random ();
 			fillWeapons();
+			fillArmor ();
 			fillPrefix ();
 			fillSuffix ();
 		}
@@ -143,7 +144,59 @@ namespace ItemGen
 
 		private void fillArmor()
 		{
-			//todo
+			List<string> itemList = new List<string> (){ "cap", 
+				"helm", 
+				"helmet", 
+				"mask", 
+				"goggles"
+				};
+			nameDictionary.Add(ItemType.Head, itemList);
+
+			itemList = new List<string>(){"shirt", 
+				"jacket", 
+				"suit", 
+				"bolster", 
+				"armor", 
+				"skinsuit", 
+				"parka", 
+				"shell"};
+			nameDictionary.Add(ItemType.Chest, itemList);
+
+			itemList = new List<string>(){"leggings", 
+				"slacks", 
+				"pants"};
+			nameDictionary.Add(ItemType.Legs, itemList);
+
+			itemList = new List<string>(){"gaitors", 
+				"greives", 
+				"boots", 
+				"shoes", 
+				"stompers"};
+			nameDictionary.Add(ItemType.Boots, itemList);
+
+			itemList = new List<string>(){"gloves", 
+				"gauntlets", 
+				"gaunts"};
+			nameDictionary.Add(ItemType.Gloves, itemList);
+
+			itemList = new List<string>(){"bauble", 
+				"watch", 
+				"trinket", 
+				"wrench", 
+				"ring", 
+				"locket", 
+				"spyglass", 
+				"compass", 
+				"chronometer", 
+				"thermometer", 
+				"scope", 
+				"amulet", 
+				"kit", 
+				"bracelet", 
+				"wristband", 
+				"doll"};
+			nameDictionary.Add(ItemType.Misc, itemList);
+
 		}
 
 		public T RandomEnumValue<T> ()
